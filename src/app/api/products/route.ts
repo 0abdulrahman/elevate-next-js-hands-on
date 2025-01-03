@@ -7,7 +7,7 @@ import { NextRequest } from "next/server";
 // NOTE: In order to access the client headers/cookies, you MUST call this endpoint from the client-side,
 // because a call from a server-side will not include any cookies automatically, and you have to manually specify it in this case.
 export async function GET(req: NextRequest) {
-  const locale = req.headers.get("NEXT_LOCALE") || "ar";
+  const locale = req.cookies.get("NEXT_LOCALE")?.value || "ar";
   const token = await getToken({ req });
 
   const response = await fetch(process.env.API + "/products", {
